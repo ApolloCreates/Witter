@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFriends } from "../../state";
 
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 const FriendListWidget = ({ userId }) => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const FriendListWidget = ({ userId }) => {
 
   const getFriends = async () => {
     const response = await fetch(
-      `https://witter-fb4c.onrender.com/users/${userId}/friends`,
+      `${BASE_URL}/users/${userId}/friends`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },

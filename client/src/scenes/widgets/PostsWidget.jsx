@@ -8,8 +8,10 @@ const PostsWidget = ({ userId, isProfile = false }) => {
   const posts = useSelector((state) => state.posts);
   const token = useSelector((state) => state.token);
 
+  const BASE_URL = import.meta.env.VITE_API_URL;
+
   const getPosts = async () => {
-    const response = await fetch("https://witter-fb4c.onrender.com/posts", {
+    const response = await fetch(`${BASE_URL}/posts`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -19,11 +21,11 @@ const PostsWidget = ({ userId, isProfile = false }) => {
 
   const getUserPosts = async () => {
     const response = await fetch(
-      `https://witter-fb4c.onrender.com/posts/${userId}/posts`,
+      `${BASE_URL}/posts/${userId}/posts`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
-      }
+      },
     );
     const data = await response.json();
     dispatch(setPosts({ posts: data }));
@@ -64,7 +66,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
             likes={likes}
             comments={comments}
           />
-        )
+        ),
       )}
     </>
   );

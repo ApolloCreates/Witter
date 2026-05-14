@@ -12,6 +12,8 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 const UserWidget = ({ picturePath }) => {
   const [user, setUser] = useState(null);
   const { palette } = useTheme();
@@ -36,7 +38,7 @@ const UserWidget = ({ picturePath }) => {
           return;
         }
 
-        const response = await fetch(`https://witter-fb4c.onrender.com/users/${userId}`, {
+        const response = await fetch(`${BASE_URL}/users/${userId}`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
